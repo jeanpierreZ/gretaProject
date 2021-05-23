@@ -1,5 +1,4 @@
 import os
-import time
 from datetime import datetime
 
 import backtrader as bt
@@ -54,17 +53,17 @@ def config_cerebro(symbol, start_date, end_date, percentage, length):
 
 def index(request):
     chart_image_name = 'chart.png'
-
-    context = {'chart': '', 'cash_start': '', 'cash_end': ''}
+    context = {}
 
     if request.method == 'GET':
         pass
     else:  # request.method == 'POST'
-        print(request.POST.get('crypto'))
-        print(request.POST.get('start_date'))
-        print(request.POST.get('end_date'))
-        print(request.POST.get('length'))
-        print(request.POST.get('percentage'))
+        print(request.POST.get('crypto'),
+              request.POST.get('start_date'),
+              request.POST.get('end_date'),
+              request.POST.get('length'),
+              request.POST.get('percentage'))
+
         crypto = request.POST.get('crypto')
         start_date = request.POST.get('start_date')
         end_date = request.POST.get('end_date')
@@ -73,16 +72,16 @@ def index(request):
 
         figure = config_cerebro(crypto, start_date, end_date, percentage, length).plot(style='candlebars')[0][0]
 
-        chart = Chart(name=chart_image_name, image=chart_image_name)
+        # Create a chart object model
+        chart = Chart(image=chart_image_name)
         chart.save()
+        # Update the image name
         chart.image = str(chart.pk) + chart_image_name
         chart.save()
 
         my_chart = os.path.join(settings.MEDIA_ROOT, str(chart.get_image()))
 
         figure.savefig(my_chart, bbox_inches="tight")
-
-        time.sleep(1)
 
         context = {'chart': chart,
                    'cash_start': cash_start,
