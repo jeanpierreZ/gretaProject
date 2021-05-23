@@ -1,0 +1,26 @@
+* {
+    color: white;
+    text-align: center;
+}
+
+body {
+    background: url(/static/cerebro_x_men.jpg) fixed no-repeat center;
+    background-size: cover;
+}
+
+li {
+    list-style-position: inside;
+}
+
+input {
+    background-color: black;
+}
+
+button.button_style {
+    font-weight: bold ;
+    font-size: 20px;
+    background: #e7e7e7; /* Gray */
+    padding: 15px 30px;
+    color: black;
+    border-radius: 25px;
+}
