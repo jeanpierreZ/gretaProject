@@ -72,7 +72,9 @@ def index(request):
 
         figure = config_cerebro(crypto, start_date, end_date, percentage, length).plot(style='candlebars',
                                                                                        barup='green',
-                                                                                       bardown='red')[0][0]
+                                                                                       bardown='red',
+                                                                                       volup='green',
+                                                                                       voldown='red', )[0][0]
 
         # Create a chart object model
         chart = Chart(image=chart_image_name)

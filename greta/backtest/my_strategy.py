@@ -3,6 +3,8 @@ from __future__ import (absolute_import, division, print_function, unicode_liter
 # Import the backtrader platform
 import backtrader as bt
 
+from .my_ema import MyEMA
+
 
 # Create a Strategy
 class MyStrategy(bt.Strategy):
@@ -22,8 +24,9 @@ class MyStrategy(bt.Strategy):
         self.buyprice = None
         self.buycomm = None
 
-        # Add a ExponentialMovingAverage indicator
-        self.ema = bt.indicators.ExponentialMovingAverage(self.datas[0], period=self.params.maperiod)
+        # Add a custom ExponentialMovingAverage indicator
+        my_ema = MyEMA(self.datas[0], period=self.params.maperiod)
+        self.ema = my_ema
 
     def notify_order(self, order):
         if order.status in [order.Submitted, order.Accepted]:
