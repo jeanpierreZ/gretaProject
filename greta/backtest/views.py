@@ -70,7 +70,9 @@ def index(request):
         length = int(request.POST.get('length'))
         percentage = int(request.POST.get('percentage'))
 
-        figure = config_cerebro(crypto, start_date, end_date, percentage, length).plot(style='candlebars')[0][0]
+        figure = config_cerebro(crypto, start_date, end_date, percentage, length).plot(style='candlebars',
+                                                                                       barup='green',
+                                                                                       bardown='red')[0][0]
 
         # Create a chart object model
         chart = Chart(image=chart_image_name)
