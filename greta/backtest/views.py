@@ -6,6 +6,7 @@ from django.conf import settings
 from django.shortcuts import render
 
 from .models import Chart
+from .my_buy_sell_arrows import MyBuySell
 from .my_strategy import MyStrategy
 
 
@@ -16,6 +17,9 @@ def config_cerebro(symbol, start_date, end_date, percentage, length):
     print(from_date)
     to_date = datetime(int(end_date[:4]), int(end_date[5:7]), int(end_date[8:]))
     print(to_date)
+
+    # Patch observer for custom arrows
+    bt.observers.BuySell = MyBuySell
 
     # Create a cerebro entity
     cerebro = bt.Cerebro()
